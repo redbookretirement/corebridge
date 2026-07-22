@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corebridge 보험금 청구 안내 | Grace of Wealth</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F1EA;
+    --green: #0D5A4E;
+    --lime: #D8F247;
+    --navy: #284C7D;
+    --dark: #1A1A1A;
+    --text-muted: #5a6a60;
+    --border: rgba(13,90,78,0.15);
+    --card-bg: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--green);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    color: var(--lime);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.3px;
+  }
+  .nav-logo span { color: #fff; font-weight: 400; }
+  .nav-cta {
+    background: var(--lime);
+    color: var(--green);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: -0.2px;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--green);
+    padding: 72px 2rem 80px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(216,242,71,0.2);
+    color: var(--lime);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    color: #fff;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero h1 em {
+    color: var(--lime);
+    font-style: normal;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 17px;
+    max-width: 520px;
+    margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .hero-cta-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--lime);
+    color: var(--green);
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: -0.3px;
+  }
+  .btn-outline {
+    background: transparent;
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+
+
+  /* SECTION COMMONS */
+  section { padding: 72px 2rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+  .section-tag {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-size: clamp(22px, 3vw, 34px);
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: -0.8px;
+    margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .section-desc {
+    color: var(--text-muted);
+    font-size: 16px;
+    max-width: 580px;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+
+  /* CLAIM TYPE CARDS */
+  .claim-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .claim-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: box-shadow 0.18s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .claim-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent-color, var(--green));
+    border-radius: 14px 14px 0 0;
+  }
+  .claim-card:hover { box-shadow: 0 8px 32px rgba(13,90,78,0.1); }
+  .claim-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--accent-color, var(--green));
+  }
+  .claim-card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+  .claim-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 16px;
+  }
+  .claim-badge-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: #f0f7f5;
+    color: var(--green);
+    border: 1px solid rgba(13,90,78,0.15);
+  }
+
+  /* ACCORDION / STEPS SECTION */
+  .steps-section { background: var(--green); }
+  .steps-section .section-tag { color: var(--lime); }
+  .steps-section .section-title { color: #fff; }
+  .steps-section .section-desc { color: rgba(255,255,255,0.65); }
+
+  .step-list { display: flex; flex-direction: column; gap: 0; }
+  .step-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0 20px;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(216,242,71,0.15);
+    border: 1.5px solid var(--lime);
+    color: var(--lime);
+    font-size: 18px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .step-content p {
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.68);
+    line-height: 1.65;
+  }
+  .step-note {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(216,242,71,0.1);
+    border-left: 3px solid var(--lime);
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* RIDER CHECK SECTION */
+  .rider-section { background: #fff; }
+  .rider-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 14px;
+  }
+  .rider-table th {
+    background: var(--green);
+    color: #fff;
+    font-weight: 700;
+    padding: 13px 18px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
+  .rider-table th:first-child { border-radius: 10px 0 0 0; }
+  .rider-table th:last-child { border-radius: 0 10px 0 0; }
+  .rider-table td {
+    padding: 13px 18px;
+    border-bottom: 1px solid #eee;
+    color: #3a4a44;
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .rider-table tr:hover td { background: #f7faf9; }
+  .rider-table td:first-child { font-weight: 700; color: var(--green); }
+  .check-yes {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .check-yes::before {
+    content: '✓';
+    width: 18px;
+    height: 18px;
+    background: var(--lime);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--green);
+    flex-shrink: 0;
+  }
+
+  /* TIMELINE / PAYMENT SECTION */
+  .timeline-section { background: var(--cream); }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .timeline-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+  }
+  .timeline-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--green);
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .timeline-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .timeline-desc {
+    font-size: 13px;
+    color: #6b7a72;
+    line-height: 1.55;
+  }
+  .payout-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .payout-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 22px;
+  }
+  .payout-card.featured {
+    border-color: var(--green);
+    border-width: 1.5px;
+  }
+  .payout-icon {
+    width: 40px;
+    height: 40px;
+    background: #f0f7f5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+    font-size: 20px;
+  }
+  .payout-card h4 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+  .payout-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* FAQ */
+  .faq-section { background: #fff; }
+  .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 36px; }
+  .faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 20px 0;
+  }
+  .faq-q {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .faq-q::before {
+    content: 'Q';
+    width: 24px;
+    height: 24px;
+    background: var(--lime);
+    color: var(--green);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .faq-a {
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding-left: 34px;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--navy);
+    padding: 80px 2rem;
+    text-align: center;
+  }
+  .cta-section h2 {
+    color: #fff;
+    font-size: clamp(24px, 3.5vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    margin-bottom: 16px;
+    line-height: 1.25;
+  }
+  .cta-section h2 em {
+    color: var(--lime);
+    font-style: normal;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.65);
+    font-size: 16px;
+    margin-bottom: 36px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-contact-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 36px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .cta-contact-box h3 {
+    color: var(--lime);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .contact-line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+  }
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(216,242,71,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .contact-line a {
+    color: var(--lime);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .cta-btn-row {
+    margin-top: 28px;
+  }
+  .btn-lime-full {
+    display: block;
+    width: 100%;
+    background: var(--lime);
+    color: var(--green);
+    font-weight: 800;
+    font-size: 16px;
+    padding: 16px;
+    border-radius: 10px;
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 36px 2rem;
+    text-align: center;
+  }
+  footer p {
+    color: rgba(255,255,255,0.4);
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  footer strong {
+    color: rgba(255,255,255,0.7);
+  }
+
+  @media (max-width: 600px) {
+    .trust-bar { gap: 16px; }
+    .payout-options { grid-template-columns: 1fr; }
+    .step-item { grid-template-columns: 44px 1fr; }
+    .cta-contact-box { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Grace <span>of Wealth</span></div>
+  <a href="#consultation" class="nav-cta">무료 상담 신청</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">Corebridge Financial (구 American General)</div>
+    <h1><em>보험금 청구 절차 안내</em></h1>
+    <p class="hero-sub">
+      사망보험금 · 가속사망보험금(ADB) 청구 절차와<br>
+      주요 유의사항을 한국어로 정리했습니다.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#claim-types" class="btn-primary">내 청구 유형 확인하기 →</a>
+      <a href="#steps" class="btn-outline">청구 절차 보기</a>
+    </div>
+
+    <div style="margin-top:40px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:rgba(255,255,255,0.45); width:100%; margin-bottom:4px;">Corebridge 공식 클레임 접수 바로가기</div>
+      <a href="https://www.corebridgefinancial.com/support/file-an-accelerated-death-benefit-terminal-illness-rider-claim" target="_blank" rel="noopener"
+        style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:13px; font-weight:600; padding:10px 18px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:7px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        ADB · Terminal Illness 클레임 접수
+      </a>
+      <a href="https://www.corebridgefinancial.com/support/report-death-claim" target="_blank" rel="noopener"
+        style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:#fff; font-size:13px; font-weight:600; padding:10px 18px; border-radius:8px; text-decoration:none; display:inline-flex; align-items:center; gap:7px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Death Claim 접수
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- CLAIM TYPES -->
+<section id="claim-types">
+  <div class="container">
+    <div class="section-tag">Step 1 · 청구 유형 파악</div>
+    <h2 class="section-title">어떤 보험금을 청구할 수 있나요?</h2>
+    <p class="section-desc">
+      Corebridge 폴리시는 크게 4가지 유형의 보험금 청구가 가능합니다. 
+      본인 또는 가족의 상황에 맞는 유형을 먼저 확인하세요.
+    </p>
+    <div class="claim-grid">
+
+      <div class="claim-card" style="--accent-color: #0D5A4E;">
+        <div class="claim-tag">사망보험금</div>
+        <h3>Life Insurance Claim</h3>
+        <p>피보험자 사망 후 수익자(Beneficiary)가 청구하는 보험금입니다. 폴리시 금액 전액이 지급됩니다.</p>
+        <div class="claim-badge-list">
+          <span class="badge">사망진단서 필요</span>
+          <span class="badge">7–10 영업일 지급</span>
+          <span class="badge">일시금 or 분할 선택</span>
+        </div>
+      </div>
+
+      <div class="claim-card" style="--accent-color: #D8A200;">
+        <div class="claim-tag" style="color:#D8A200;">가속사망보험금 · 말기질환</div>
+        <h3>Terminal Illness ADB</h3>
+        <p>의사로부터 기대여명 24개월 이하 진단을 받은 경우, 생전에 보험금 일부를 선지급받을 수 있습니다.</p>
+        <div class="claim-badge-list">
+          <span class="badge">생전 수령 가능</span>
+          <span class="badge">의사 진단서 필요</span>
+          <span class="badge">폴리시 일부 지급</span>
+        </div>
+      </div>
+
+      <div class="claim-card" style="--accent-color: #284C7D;">
+        <div class="claim-tag" style="color:#284C7D;">가속사망보험금 · 만성질환</div>
+        <h3>Chronic Illness ADB</h3>
+        <p>일상 활동(ADL) 2가지 이상 수행 불가 또는 인지장애로 진단된 경우 신청 가능합니다. 장기요양 비용 지원에 활용됩니다.</p>
+        <div class="claim-badge-list">
+          <span class="badge">ADL 2개 이상 해당</span>
+          <span class="badge">인지장애 포함</span>
+          <span class="badge">연간 한도 있음</span>
+        </div>
+      </div>
+
+      <div class="claim-card" style="--accent-color: #B94040;">
+        <div class="claim-tag" style="color:#B94040;">가속사망보험금 · 중증질환</div>
+        <h3>Critical Illness ADB</h3>
+        <p>암, 심장마비, 뇌졸중 등 지정된 중증질환 진단 시 청구 가능합니다. 폴리시 내 Rider 조항 확인이 필요합니다.</p>
+        <div class="claim-badge-list">
+          <span class="badge">암·심장마비·뇌졸중</span>
+          <span class="badge">Rider 확인 필수</span>
+          <span class="badge">일시 선지급</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- RIDER CHECK -->
+<section class="rider-section" id="rider-check">
+  <div class="container">
+    <div class="section-tag">Step 2 · 폴리시 확인</div>
+    <h2 class="section-title">내 폴리시에 Rider가 있는지 확인하는 법</h2>
+    <p class="section-desc">
+      가속사망보험금을 받으려면 폴리시 계약서에 해당 Rider가 포함되어 있어야 합니다. 
+      아래 표를 참고해 직접 확인해 보세요.
+    </p>
+
+    <div style="background:#f7faf9; border:1px solid var(--border); border-radius:12px; padding:24px; margin-bottom:32px;">
+      <div style="font-weight:700; color:var(--green); margin-bottom:12px; font-size:15px;">📄 확인 위치</div>
+      <p style="font-size:14.5px; color:var(--text-muted); line-height:1.7;">
+        폴리시 계약서 앞부분 <strong style="color:var(--dark)">Policy Schedule 섹션</strong>을 확인하세요. 
+        보유 중인 모든 Rider 목록이 나열되어 있습니다. 
+        아래 이름 중 하나라도 포함되어 있으면 해당 청구가 가능합니다.
+      </p>
+    </div>
+
+    <table class="rider-table">
+      <thead>
+        <tr>
+          <th>Rider 명칭</th>
+          <th>해당 청구 유형</th>
+          <th>주요 적용 조건</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Terminal Illness Accelerated Death Benefit Rider</td>
+          <td><span class="check-yes">말기질환 ADB</span></td>
+          <td>기대여명 24개월 이하 의사 진단</td>
+        </tr>
+        <tr>
+          <td>Terminal Illness Rider</td>
+          <td><span class="check-yes">말기질환 ADB</span></td>
+          <td>기대여명 24개월 이하 의사 진단</td>
+        </tr>
+        <tr>
+          <td>Chronic Illness Accelerated Death Benefit Rider</td>
+          <td><span class="check-yes">만성질환 ADB</span></td>
+          <td>ADL 2개 이상 불가 or 인지장애</td>
+        </tr>
+        <tr>
+          <td>Critical Illness Accelerated Death Benefit Rider</td>
+          <td><span class="check-yes">중증질환 ADB</span></td>
+          <td>암·심장마비·뇌졸중 등 지정 질환</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:20px; padding:16px 20px; background:#fff8e6; border-left:4px solid #D8A200; border-radius:0 8px 8px 0; font-size:14px; color:#7a5a00; line-height:1.65;">
+      <strong>Rider가 없다면?</strong> 폴리시에 Rider가 없어도 사망보험금(Life Insurance Claim)은 청구 가능합니다. 
+      또한 폴리시 사본을 분실한 경우 Corebridge 고객센터(800-888-2452)에 연락하면 재발급받을 수 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps-section" id="steps">
+  <div class="container">
+    <div class="section-tag">Step 3 · 청구 절차</div>
+    <h2 class="section-title">단계별 청구 절차 안내</h2>
+    <p class="section-desc">처음이라도 걱정 마세요. 순서대로 따라오시면 됩니다.</p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>폴리시 원본 확인</h4>
+          <p>보험 계약서를 찾고, Policy Schedule에서 보험금액과 Rider 목록을 확인합니다. 분실 시 Corebridge에 사본 요청이 가능합니다.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>필요 서류 준비</h4>
+          <p>청구 유형에 따라 서류가 다릅니다.</p>
+          <div class="step-note">
+            <strong>사망보험금:</strong> 공증된 사망진단서(Death Certificate) 여러 부 준비<br>
+            <strong>가속사망보험금:</strong> 진단 의사의 서명이 담긴 의료 기록 및 진단서
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>온라인 클레임 접수</h4>
+          <p>Corebridge 공식 웹사이트 또는 고객센터(800-888-2452)를 통해 클레임을 개시합니다. 접수 후 영업일 기준 5일 이내에 클레임 양식을 발송받습니다.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>클레임 양식 작성 및 제출</h4>
+          <p>발송된 양식의 Part C는 반드시 담당 의사(또는 의료 전문가)가 직접 작성 및 서명해야 합니다. 작성 완료 후 지정 주소로 발송합니다.</p>
+          <div class="step-note">
+            폴리시 발급 또는 재가입 후 2년 이내 진단이라면 "Contestable" 클레임으로 분류되어 추가 설문지가 요청될 수 있습니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h4>심사 및 승인</h4>
+          <p>클레임팀이 의료 기록을 수집·검토합니다. 의료 제공자 수와 기록 제출 속도에 따라 소요 기간이 달라집니다. 가속사망보험금 승인 시 60일 이내 지급 선택 양식을 제출해야 합니다.</p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <h4>보험금 수령</h4>
+          <p>승인된 금액이 통보되며, 일시금 또는 분할 지급 방식 중 선택할 수 있습니다. 사망보험금은 평균 7–10 영업일 이내 지급됩니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE & PAYOUT -->
+<section class="timeline-section" id="timeline">
+  <div class="container">
+    <div class="section-tag">Step 4 · 지급 기간 & 방식</div>
+    <h2 class="section-title">보험금, 얼마나 걸리고 어떻게 받나요?</h2>
+    <p class="section-desc">
+      청구 유형과 서류 제출 속도에 따라 기간이 달라질 수 있습니다.
+    </p>
+
+    <div class="timeline-row">
+      <div class="timeline-card">
+        <div class="timeline-num">5일</div>
+        <div class="timeline-label">양식 발송</div>
+        <div class="timeline-desc">접수 후 영업일 기준 클레임 양식 수령까지</div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">7–10일</div>
+        <div class="timeline-label">사망보험금</div>
+        <div class="timeline-desc">서류 완비 후 평균 지급 소요 기간</div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">60일</div>
+        <div class="timeline-label">ADB 선택기한</div>
+        <div class="timeline-desc">승인 통보 후 지급 방식 선택 양식 제출 기한</div>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">2년</div>
+        <div class="timeline-label">Contestable 기간</div>
+        <div class="timeline-desc">폴리시 발급 후 2년 이내 청구 시 추가 심사</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:20px; font-weight:800; color:var(--green); margin:48px 0 8px; letter-spacing:-0.4px;">보험금 수령 방식 선택</h3>
+    <p style="color:var(--text-muted); font-size:14.5px; margin-bottom:8px;">수익자 상황에 맞는 방식을 선택할 수 있습니다.</p>
+
+    <div class="payout-options">
+      <div class="payout-card featured">
+        <div class="payout-icon">💰</div>
+        <h4>일시금 (Lump Sum)</h4>
+        <p>전체 보험금을 한 번에 수령합니다. 부채 상환, 장례 비용, 자산 재배분 등 즉각적인 필요에 적합합니다.</p>
+      </div>
+      <div class="payout-card">
+        <div class="payout-icon">📅</div>
+        <h4>분할 지급 (Installments)</h4>
+        <p>보험사가 금액을 보관하고 일정 기간 분할 지급합니다. 이 경우 이자 수익이 발생할 수도 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-tag">보험금 청구 절차 안내</div>
+    <h2 class="section-title">자주 묻는 질문</h2>
+    <p class="section-desc">클레임 과정에서 자주 헷갈리는 부분을 Corebridge 공식 FAQ 기반으로 정리했습니다.</p>
+
+    <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--lime);">서류 및 접수</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">클레임 접수에 필요한 서류는 무엇인가요?</div>
+        <div class="faq-a">온라인 접수 후 발송되는 클레임 양식을 폴리시 오너와 담당 의사가 모두 작성·서명해야 합니다. HIPAA 동의서도 반드시 포함해야 합니다. 의료 기록 등 추가 서류는 클레임팀이 직접 수집합니다. 특수한 경우(수익자가 irrevocable로 지정되어 있거나, 폴리시 명의가 신탁으로 되어 있는 경우)에는 추가 서류가 요청될 수 있습니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">피보험자가 서류에 직접 서명하기 어려운 상황이에요.</div>
+        <div class="faq-a">위임장(Power of Attorney)을 보유한 대리인이 피보험자 대신 서명할 수 있습니다. 이 경우 위임장 사본도 함께 제출해야 합니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">진단 후 얼마나 지나야 클레임을 신청할 수 있나요? 기한이 있나요?</div>
+        <div class="faq-a">Rider 명칭에 "Accelerated Death Benefit"이 포함된 경우, 의사 진단 확인 후 365일(12개월) 이내에 클레임을 접수해야 합니다. 개인 폴리시 Rider 조항을 반드시 확인하세요.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">폴리시를 분실했어요. 어떻게 청구하나요?</div>
+        <div class="faq-a">Corebridge 고객센터(800-888-2452)에 연락하시면 계약서 사본 재발급이 가능합니다. 전자 파일 요청도 가능하니 담당자에게 문의하세요.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">사망진단서는 몇 부나 준비해야 하나요?</div>
+        <div class="faq-a">보험사 제출용 외에도 은행 계좌 정리, 부동산 처리 등 여러 기관에 필요하므로 공증된 원본을 최소 5–6부 이상 준비해 두시는 것을 권장합니다. 병원이나 장례식장에서 발급 시 한 번에 여러 부를 요청하세요.</div>
+      </div>
+
+    </div>
+
+    <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); margin:40px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--lime);">대기 기간 및 자격 조건</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">클레임 신청 전에 대기 기간이 있나요?</div>
+        <div class="faq-a">보험 가입 직후 바로 청구는 어려울 수 있습니다. 중증·만성질환의 경우 Rider가 활성화된 날로부터 30일이 지나야 청구 자격이 생깁니다. 30일 이내에 진단을 받은 경우 혜택이 지급되지 않을 수 있습니다. 말기질환(Terminal Illness)은 이 대기 기간이 없습니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">만성질환(Chronic Illness)은 바로 혜택을 받을 수 있나요?</div>
+        <div class="faq-a">대부분의 만성질환 Rider에는 90일 연속 대기 기간(Elimination Period)이 있습니다. 즉, 만성질환 진단 후 90일이 지속되어야 혜택 수령 자격이 생깁니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">담당 의사가 미국 밖에 있어요. 클레임이 가능한가요?</div>
+        <div class="faq-a">ADB 클레임은 반드시 미국 사회보장법 Section 1861(r)(1) 기준을 충족하는 미국 의사(U.S. physician)가 인증해야 합니다. 해외에서 진료하는 미국 면허 의사의 경우, 폴리시 오너와 해당 의사가 모두 서명한 "Licensed Health Care Practitioner" 양식을 별도 제출해야 처리가 가능합니다.</div>
+      </div>
+
+    </div>
+
+    <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); margin:40px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--lime);">보험금 및 보험료</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">가속사망보험금을 받으면 남은 보험금은 어떻게 되나요?</div>
+        <div class="faq-a">ADB로 선지급받은 금액은 최종 사망보험금에서 차감됩니다. 예를 들어 보험금이 $500,000이고 ADB로 $200,000을 받았다면, 사망 시 수익자에게 $300,000(조정 후 금액)이 지급됩니다. 전액 선지급 시 폴리시가 종료될 수 있습니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">ADB를 받으면 다른 Rider도 영향을 받나요?</div>
+        <div class="faq-a">네. 하나의 Rider에서 ADB를 수령하면 다른 모든 Rider에서의 가용 보험금도 함께 줄어듭니다. 전체 폴리시 기준 ADB 최대 한도는 $2,000,000입니다. 수령 전 전체 폴리시 영향을 반드시 검토하세요.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">ADB 수령 후 보험료(Premium)가 바뀌나요?</div>
+        <div class="faq-a">폴리시는 그대로 유지되며 새로 보험을 드는 것이 아닙니다. ADB로 일부를 수령하면 남은 사망보험금이 줄어들고, 보험료도 그에 맞게 조정됩니다. 정기보험(Term)은 남은 금액 기준으로 보험료가 변경되고, 전액 수령 시 폴리시가 종료됩니다. Universal Life는 보험료가 유연한 상품이므로 수령 후 고객 서비스에 연락해 새 보험료 금액을 설정해야 합니다.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Critical Illness ADB 신청 후 같은 질환으로 또 신청할 수 있나요?</div>
+        <div class="faq-a">대부분의 경우 동일 질환에 대한 Critical Illness ADB 및 Chronic Illness ADB 청구 기회는 각각 1회입니다. 폴리시 유형에 따라 다를 수 있으니 계약서를 반드시 확인하세요.</div>
+      </div>
+
+    </div>
+
+    <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); margin:40px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--lime);">세금 및 공공혜택</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">ADB를 받으면 세금을 내야 하나요?</div>
+        <div class="faq-a">IRC Section 101(g)에 따라 ADB는 일반적으로 비과세 처리됩니다. 그러나 만성·말기질환 수령 시 IRS Form 1099-LTC, 중증질환 수령 시 IRS Form 1099-R이 발송됩니다. 수령 금액이 국세청 일일 한도(per diem limitation)를 초과하면 과세 대상이 될 수 있습니다. 개인 상황에 따라 다르므로 세무사와 반드시 상담하세요.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Medi-Cal이나 Medicaid를 받고 있는데 ADB 수령해도 되나요?</div>
+        <div class="faq-a">ADB 수령은 Medi-Cal 또는 Medicaid 수급 자격에 영향을 줄 수 있습니다. 선지급을 결정하기 전 반드시 담당 사회복지 기관(Social Services Agency)에 먼저 문의하여 자격 변동 여부를 확인하시기 바랍니다.</div>
+      </div>
+
+    </div>
+
+    <div style="font-size:13px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--green); margin:40px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--lime);">지급 방식</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q">클레임이 거절될 수 있나요?</div>
+        <div class="faq-a">Contestable 기간(발급 후 2년 이내) 중 청구이거나, Rider 조항에 명시되지 않은 질환인 경우 승인이 어려울 수 있습니다. 폴리시 계약 시 고지 의무 위반 이력도 영향을 줄 수 있습니다. 거절 시 이의 신청(Appeal) 절차가 있으니 포기하지 마시고 상담하세요.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">보험금을 전자이체(EFT) 또는 전신송금(Wire Transfer)으로 받을 수 있나요?</div>
+        <div class="faq-a">가능합니다. EFT 또는 Wire Transfer를 원하시면 은행 라우팅 번호와 계좌 번호 확인을 위해 수표(void check) 사본을 제출해야 합니다. 해외 송금의 경우 중개 은행(intermediary bank) 정보가 추가로 필요하며 처리 시간이 더 소요될 수 있습니다.</div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- LTC VS ADB COMPARISON -->
+<section style="background:#fff; padding:72px 2rem;" id="ltc-vs-adb">
+  <div class="container">
+    <div class="section-tag">꼭 알아야 할 차이점</div>
+    <h2 class="section-title">ADB와 장기요양보험(LTC)은 다릅니다</h2>
+    <p class="section-desc">두 상품은 유사해 보이지만 구조와 작동 방식이 근본적으로 다릅니다. 혼동하지 않도록 주요 차이를 정리했습니다.</p>
+
+    <div style="overflow-x:auto;">
+      <table class="rider-table" style="margin-top:0;">
+        <thead>
+          <tr>
+            <th style="width:30%;">비교 항목</th>
+            <th style="width:35%;">가속사망보험금 (ADB)</th>
+            <th style="width:35%;">장기요양보험 (LTC)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>상품 성격</td>
+            <td>생명보험의 사망보험금을 생전에 일부 선지급</td>
+            <td>별도의 독립 보험 상품</td>
+          </tr>
+          <tr>
+            <td>사망보험금 영향</td>
+            <td style="color:#B94040; font-weight:600;">수령액만큼 사망보험금 감액됨</td>
+            <td style="color:var(--green); font-weight:600;">사망보험금에 영향 없음</td>
+          </tr>
+          <tr>
+            <td>영수증·사용처 제한</td>
+            <td>영수증 불필요, 사용처 자유</td>
+            <td>요양 서비스 비용에만 사용 가능</td>
+          </tr>
+          <tr>
+            <td>혜택 기준</td>
+            <td>폴리시 보험금 잔액 기준</td>
+            <td>가입 시 선택한 보장 한도·기간 기준</td>
+          </tr>
+          <tr>
+            <td>보장 범위</td>
+            <td>지정 질환 조건 충족 시</td>
+            <td>재가·시설·지역사회 요양 전반</td>
+          </tr>
+          <tr>
+            <td>Medi-Cal·Medicaid 영향</td>
+            <td style="color:#B94040; font-weight:600;">수령 전 사회복지 기관 확인 필요</td>
+            <td>별도 확인 필요</td>
+          </tr>
+          <tr>
+            <td>폴리시 종료 가능성</td>
+            <td>전액 수령 시 폴리시 종료됨</td>
+            <td>해당 없음</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:20px; padding:16px 20px; background:#fef3f3; border-left:4px solid #B94040; border-radius:0 8px 8px 0; font-size:14px; color:#7a2020; line-height:1.7;">
+      <strong>중요:</strong> ADB는 장기요양보험(LTC)이 아닙니다. 실제 요양 비용 전액을 커버하지 못할 수 있으며, 선지급 후 폴리시가 종료될 경우 남은 가족에게 전달되는 사망보험금이 없어질 수 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- TAX & KEY NOTICES -->
+<section style="background:var(--cream); padding:72px 2rem;" id="notices">
+  <div class="container">
+    <div class="section-tag">세금 및 주요 고지사항</div>
+    <h2 class="section-title">수령 전 반드시 확인하세요</h2>
+    <p class="section-desc">ADB 수령은 세금 및 공공혜택에 영향을 줄 수 있습니다. 결정 전에 아래 사항을 꼭 검토하시기 바랍니다.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:20px;">
+
+      <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:26px 22px;">
+        <div style="font-size:22px; margin-bottom:12px;">🧾</div>
+        <h4 style="font-size:16px; font-weight:800; color:var(--dark); margin-bottom:10px; letter-spacing:-0.2px;">세금 신고 양식 (IRS Form)</h4>
+        <p style="font-size:14px; color:var(--text-muted); line-height:1.65;">
+          만성질환·말기질환 ADB 수령 시 <strong style="color:var(--dark);">IRS Form 1099-LTC</strong>가 발송됩니다.<br><br>
+          중증질환 ADB 수령 시 <strong style="color:var(--dark);">IRS Form 1099-R</strong>이 발송됩니다.<br><br>
+          IRC Section 101(g)에 따라 일반적으로 비과세 처리되나, 특정 상황에서는 과세 대상이 될 수 있습니다.
+        </p>
+      </div>
+
+      <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:26px 22px;">
+        <div style="font-size:22px; margin-bottom:12px;">🏛️</div>
+        <h4 style="font-size:16px; font-weight:800; color:var(--dark); margin-bottom:10px; letter-spacing:-0.2px;">Medi-Cal · Medicaid 영향</h4>
+        <p style="font-size:14px; color:var(--text-muted); line-height:1.65;">
+          ADB를 수령하면 Medi-Cal 또는 Medicaid 수급 자격에 영향을 줄 수 있습니다.<br><br>
+          선지급을 결정하기 전 반드시 담당 사회복지 기관에 먼저 문의하여 수급 자격 변동 여부를 확인하시기 바랍니다.
+        </p>
+      </div>
+
+      <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:26px 22px;">
+        <div style="font-size:22px; margin-bottom:12px;">⚠️</div>
+        <h4 style="font-size:16px; font-weight:800; color:var(--dark); margin-bottom:10px; letter-spacing:-0.2px;">ADB 한도 및 상호 영향</h4>
+        <p style="font-size:14px; color:var(--text-muted); line-height:1.65;">
+          한 Rider에서 ADB를 수령하면 다른 모든 Rider에서의 가용 금액도 함께 줄어듭니다.<br><br>
+          전체 폴리시 기준 ADB 최대 한도는 <strong style="color:var(--dark);">$2,000,000</strong>입니다. 폴리시가 전액 소진되면 계약이 종료됩니다.
+        </p>
+      </div>
+
+      <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding:26px 22px;">
+        <div style="font-size:22px; margin-bottom:12px;">📋</div>
+        <h4 style="font-size:16px; font-weight:800; color:var(--dark); margin-bottom:10px; letter-spacing:-0.2px;">Election Form 기한 엄수</h4>
+        <p style="font-size:14px; color:var(--text-muted); line-height:1.65;">
+          승인 통보 후 <strong style="color:var(--dark);">60일 이내</strong>에 지급 선택 양식(Election Form)을 제출해야 합니다.<br><br>
+          중증질환(Critical Illness)의 경우, 동일 질환 발생에 대해 Election 기회는 <strong style="color:#B94040;">단 1회</strong>입니다. 기한을 놓치면 재신청이 불가합니다.
+        </p>
+      </div>
+
+    </div>
+
+    <div style="margin-top:24px; padding:18px 22px; background:#f0f7f5; border:1px solid rgba(13,90,78,0.2); border-radius:12px; font-size:14px; color:var(--text-muted); line-height:1.7;">
+      세금 및 법적 사항은 개인 상황에 따라 다를 수 있습니다. 본 페이지는 정보 제공 목적이며 세무·법률 조언을 구성하지 않습니다. 수령 전 반드시 세무사 또는 법률 전문가와 상담하시기 바랍니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    <strong>Grace of Wealth</strong> · Insurance Producer · Licensed in 12 States<br><br>
+    <strong style="color:rgba(255,255,255,0.6);">법적 고지사항 (Legal Disclosures)</strong><br><br>
+    이 페이지는 교육 및 정보 제공 목적으로만 제작되었으며, 법적·세무적 조언을 구성하지 않습니다. American General Life Insurance Company 및 그 대리인은 법률 또는 세무 조언을 제공할 권한이 없습니다. 개인 상황에 맞는 조언을 위해 반드시 자격을 갖춘 세무사 또는 법률 전문가와 상담하시기 바랍니다.<br><br>
+    가속사망보험금(ADB) 혜택은 IRC Section 101(g)에 따라 유리한 세금 처리를 받도록 설계되어 있으나, 특정 상황에서는 과세 대상이 될 수 있습니다. ADB 수령은 Medi-Cal 또는 Medicaid 수급 자격에 영향을 줄 수 있습니다. 선지급 결정 전 담당 사회복지 기관에 문의하시기 바랍니다.<br><br>
+    ADB 수령은 해당 폴리시의 사망보험금 및 기타 폴리시 가치를 감소시키며, 경우에 따라 폴리시가 종료될 수 있습니다. 본 상품은 장기요양보험(Long-Term Care Insurance), 장애소득보험, 또는 특정 질환 비용을 보장하는 독립 보험 상품이 아닙니다. ADB 최대 선지급 한도는 피보험자 기준 전체 Rider 합산 $2,000,000입니다.<br><br>
+    보험금 지급 조건은 개인 폴리시 계약 내용에 따라 다를 수 있습니다. 자세한 내용은 폴리시 계약서를 확인하시기 바랍니다.<br><br>
+    © 2026 Grace of Wealth. All rights reserved.
+  </p>
+</footer>
+
+</body>
+</html>
